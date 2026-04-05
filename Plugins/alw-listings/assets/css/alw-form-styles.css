@@ -1,0 +1,395 @@
+/*
+ * ALW Listings Plugin Stylesheet (Corrected Version)
+ * File: wp-content/plugins/alw-listings/assets/css/alw-form-styles.css
+ */
+
+/* --- CSS Variable Definitions --- */
+:root {
+    --alw-body-font: 'Poppins', sans-serif;
+    --alw-loud-font: 'ComixLoud', 'Impact', 'Arial Black', cursive, sans-serif;
+    --alw-premium-border-color: #00aeef;
+    --alw-basic-border-color: #dddddd;
+    --alw-button-bg: #8bc63f;
+    --alw-button-hover-bg: #7ab530;
+    --alw-text-color: #3f3f3f;
+    --alw-title-color: #333333;
+    --alw-lightblue: #d1ecf1;
+}
+
+/* --- Global Styles & Resets --- */
+body {
+    font-family: var(--alw-body-font);
+    font-size: 16px;
+    line-height: 24px;
+    color: #333;
+    font-weight: 400;
+}
+* {
+    box-sizing: border-box;
+}
+
+/* --- General Form & Layout Styles (Unchanged) --- */
+.form-heading { text-align: center; background: var(--alw-lightblue); padding: 10px; margin-bottom: 20px; border-radius: 8px; color: #333; }
+.red-asterisk { color: red; }
+.group { border: 1px solid silver; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background-color: #fff; }
+.form-group { margin-bottom: 18px; position: relative; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; }
+.form-control { width: 100%; padding: 10px 15px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+.form-control:focus { border-color: #007bff; outline: 0; box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); }
+.input-add-on { position: absolute; right: 15px; top: 50px; transform: translateY(-50%); color: #999; font-size: 1.1em; cursor: pointer; }
+.agree-container { display: flex; align-items: center; gap: 10px; margin-top: 25px; margin-bottom: 25px; flex-wrap: wrap; }
+.agree-container input[type="checkbox"] { flex-shrink: 0; width: 20px; height: 20px; margin-top: 0; }
+.btn-info { background-color: #17a2b8; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; display: block; width: 100%; text-align: center; font-size: 18px; font-weight: bold; transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out; }
+.btn-info:hover { background-color: #138496; transform: translateY(-1px); }
+.btn-info:active { transform: translateY(0); }
+.container { max-width: 960px; margin-left: auto; margin-right: auto; padding: 0 15px; }
+.row { display: flex; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; }
+[class*="col-"] { padding-left: 15px; padding-right: 15px; }
+@media (min-width: 992px) { .col-lg-5 { width: 41.66666667%; } .col-lg-1 { width: 8.33333333%; } }
+@media (min-width: 768px) and (max-width: 991px) { .col-md-5 { width: 41.66666667%; } .col-md-1 { width: 8.33333333%; } }
+@media (max-width: 767px) { .col-sm-12, .col-12 { width: 100%; } .col-lg-5, .col-md-5, .col-lg-1, .col-md-1 { width: 100%; } .input-add-on{ top: 45px; } }
+.col-md-12 { width: 100%; }
+
+/* --- Styles for Other Shortcodes (Unchanged) --- */
+.alw-all-listings-wrapper, .alw-my-listings-wrapper { margin-top: 30px; padding: 20px; background-color: #f9f9f9; border: 1px solid #eee; border-radius: 8px; }
+.alw-my-listings-wrapper h3 { margin-top: 0; font-size: 1.8em; color: #333; }
+.alw-my-listings-wrapper ul { list-style: none; padding-left: 0; }
+.alw-my-listings-wrapper li { padding: 8px 0; border-bottom: 1px dashed #eee; }
+.alw-my-listings-wrapper li:last-child { border-bottom: none; }
+
+/* --- Category Selection Styles (Unchanged) --- */
+.alw-category-selection { margin-top: 15px; }
+.alw-category-option { margin-bottom: 10px; display: block; }
+.alw-category-option label { font-weight: normal; display: inline-flex; align-items: center; cursor: pointer; margin-bottom: 0; }
+.alw-category-option input[type="radio"], .alw-category-option input[type="checkbox"] { margin-right: 8px; flex-shrink: 0; }
+
+
+/*
+ * ===================================================================
+ * CORRECTED CATEGORY LISTING STYLES
+ * This section correctly applies the desired layouts.
+ * ===================================================================
+ */
+
+/* Main container for all listings */
+.alw-category-listings-container {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* FIX: No layout styles on the base class. It's just a container. */
+.alw-listing-item {
+    text-align: left;
+}
+
+/* --- Premium Listing Styles --- */
+/* FIX: Flexbox is applied ONLY to premium to create the two-column layout. */
+.alw-listing-item.alw-listing-type-premium {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--alw-premium-border-color);
+    font-size: 16px;
+    color: var(--alw-title-color);
+}
+
+/* --- Basic Listing Styles --- */
+/* ✅ FIX: Basic is a simple block element. Its children will stack naturally. */
+.alw-listing-item.alw-listing-type-basic {
+    display: block;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--alw-basic-border-color);
+    font-size: 15px;
+    color: var(--alw-text-color);
+}
+
+/* --- Inner Element Styles --- */
+
+/* Image Column (Premium Only) */
+.alw-listing-image-column {
+    flex: 0 0 150px;
+    height: 150px;
+}
+.alw-listing-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+}
+
+/* Details Column (Premium Only) */
+.alw-listing-details-column {
+    flex: 1;
+}
+
+/* Title (Used by both Premium and Basic) */
+.alw-listing-title {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--alw-title-color);
+}
+.alw-listing-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.alw-listing-title a:hover {
+    color: var(--alw-premium-border-color);
+}
+
+/* Slogan (Premium Only) */
+.alw-listing-slogan {
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #555;
+    font-style: italic;
+}
+
+/* Category (Used by both) */
+.alw-listing-category {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #777;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+.alw-listing-category a {
+    color: #007bff;
+    text-decoration: none;
+}
+.alw-listing-category a:hover {
+    text-decoration: underline;
+}
+
+/* Description (Used by both) */
+.alw-listing-description {
+    line-height: 1.6;
+    margin-bottom: 20px;
+	overflow-wrap: break-word;
+}
+.alw-listing-description p {
+    margin: 0;
+}
+
+/* Learn More Button (Used by both, styled like a pill) */
+.alw-learn-more-button {
+    display: inline-block;
+    padding: 14px 33px;
+    margin: 10px 0px;
+    border-radius: 50px;
+    border: 3px solid #ffffff;
+    background: var(--alw-button-bg);
+    color: #fff !important;
+    box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.2);
+    font-family:  Verdana, Geneva, sans-serif; 
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+}
+.alw-learn-more-button:hover {
+    background: var(--alw-button-hover-bg);
+    color: #fff !important;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.25);
+}
+
+
+/* --- Responsive Adjustments for Listings --- */
+@media (max-width: 600px) {
+    /* FIX: This rule now correctly applies only to premium listings on mobile. */
+    .alw-listing-item.alw-listing-type-premium {
+        flex-direction: column; /* Stack image and text on mobile */
+    }
+    .alw-listing-image-column {
+        width: 100%;
+        flex-basis: 180px; /* Give it a fixed height on mobile */
+    }
+}
+
+/*
+ * ===================================================================
+ * SINGLE LISTING PAGE STYLES
+ * ===================================================================
+ */
+
+/* --- Premium Single Listing Layout --- */
+.alw-single-listing-premium {
+    padding: 20px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+/* Header Section */
+.alw-single-header {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+.alw-header-logo {
+    flex: 0 0 200px; /* Fixed width for logo */
+}
+.alw-header-logo img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+}
+.alw-header-details {
+    flex: 1;
+}
+.alw-header-details .entry-title {
+    margin-top: 0;
+    font-family: var(--alw-loud-font);
+    color: #00aeef;
+}
+.alw-slogan {
+    font-size: 1.1em;
+    margin: 5px 0 15px;
+    color: #555;
+}
+.alw-single-categories {
+    font-size: 0.9em;
+}
+.alw-single-categories .fa {
+    margin-right: 5px;
+    color: #999;
+}
+
+/* Main Content */
+.entry-content {
+    margin-bottom: 30px;
+}
+
+/* Contact Info Grid */
+.alw-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.alw-contact-item a {
+    display: block;
+    text-decoration: none;
+    color: var(--alw-text-color);
+}
+.alw-contact-item span {
+    display: block;
+    font-size: 2em;
+    color: #8a63d2; /* Purple icon color from example */
+    margin-bottom: 10px;
+}
+.alw-contact-item label {
+    display: block;
+    line-height: 1.4;
+}
+
+/* Details Grid (Hours & Map) */
+.alw-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+.alw-section-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+.alw-section-title .fa {
+    margin-right: 10px;
+    color: #8a63d2;
+}
+
+/* Hours Table */
+.alw-hours-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.alw-hours-table td {
+    padding: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.alw-hours-table .alw-day {
+    font-weight: 600;
+}
+.alw-hours-table .alw-time {
+    text-align: right;
+}
+
+/* Gallery Section */
+.alw-gallery-section {
+    margin-bottom: 30px;
+}
+.alw-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+.alw-gallery-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Footer / Website Button */
+.alw-single-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+.alw-website-button {
+    /* Re-using the pill button style */
+    display: inline-block;
+    padding: 14px 33px;
+    margin: 10px 0px;
+    border-radius: 50px;
+    border: 3px solid #ffffff;
+    background: var(--alw-button-bg);
+    color: #fff !important;
+    box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.2);
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+}
+.alw-website-button:hover {
+    background: var(--alw-button-hover-bg);
+    transform: translateY(-1px);
+    box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.25);
+}
+
+/* Responsive adjustments for single page */
+@media (max-width: 768px) {
+    .alw-single-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .alw-header-logo {
+        margin: 0 auto 20px;
+    }
+    .alw-details-grid {
+        grid-template-columns: 1fr; /* Stack hours and map on mobile */
+    }
+}
